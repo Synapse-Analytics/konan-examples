@@ -8,7 +8,7 @@ pydantic validation: https://pydantic-docs.helpmanual.io/usage/
 
 import uvicorn
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from pydantic import BaseModel, validator, ValidationError
 
 # import the types you need
@@ -21,7 +21,7 @@ app = FastAPI()
 
 # TODO: create your request serializer, insert all fields and types
 # example request seralizer
-class Request(BaseModel):
+class MLRequest(BaseModel):
     """
     Request serializer for input format validation.
     """
@@ -39,7 +39,7 @@ class Request(BaseModel):
             raise ValueError('Unkown value, must be a value in ["A", "B", "C"]')
         return v
 
-class Response(BaseModel):
+class MLResponse(BaseModel):
     """
     Response serializer for response format validation.
     All responses to credit scoring should abide by this format.
@@ -56,7 +56,7 @@ class Response(BaseModel):
         return v
 
 
-@app.post("/predict", response_model=Response)
+@app.post("/predict", response_model=MLResponse)
 def predict():
     """This is the prediction endpoint that Konan will communicate with.
 
@@ -84,4 +84,13 @@ def predict(req: Request):
 
     return formatted_prediction
 """
+
+# A health check endpoint for backend purposes. Must be included!
+@app.get('/healthz')
+def healthz_func():
+    """
+    Health check for API server.
+    Make sure it works with Kubernetes liveness probe
+    """
+    return Response(content="\n", status_code=200, media_type="text/plain")
 
