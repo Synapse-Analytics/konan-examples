@@ -14,7 +14,7 @@ from pydantic import BaseModel, validator, ValidationError
 # import the types you need
 from typing import Optional, List, Set, Tuple, Dict
 
-app = FastAPI()
+app = FastAPI(openapi_url='/docs')
 
 # TODO: load your model *here*
 # model = pickle.load(file_path)
@@ -93,4 +93,3 @@ def healthz_func():
     Make sure it works with Kubernetes liveness probe
     """
     return Response(content="\n", status_code=200, media_type="text/plain")
-
