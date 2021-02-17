@@ -21,7 +21,7 @@ app = FastAPI(openapi_url='/docs')
 
 # TODO: create your request serializer, insert all fields and types
 # example request seralizer
-class MLRequest(BaseModel):
+class PredictionRequest(BaseModel):
     """
     Request serializer for input format validation.
     """
@@ -39,7 +39,7 @@ class MLRequest(BaseModel):
             raise ValueError('Unkown value, must be a value in ["A", "B", "C"]')
         return v
 
-class MLResponse(BaseModel):
+class PredictionResponse(BaseModel):
     """
     Response serializer for response format validation.
     All responses to credit scoring should abide by this format.
@@ -56,7 +56,7 @@ class MLResponse(BaseModel):
         return v
 
 
-@app.post("/predict", response_model=MLResponse)
+@app.post("/predict", response_model=PredictionResponse)
 def predict():
     """This is the prediction endpoint that Konan will communicate with.
 
@@ -70,8 +70,8 @@ def predict():
 """
 # example of what your predict endpoint might look like.
 
-@app.post("/predict", reponse_model=Response)
-def predict(req: Request):
+@app.post("/predict", reponse_model=PredictionResponse)
+def predict(req: PredictionRequest):
 
     # call preprocess function
     clean_data = preprocess(req) # import and call your preprocessing function
