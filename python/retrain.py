@@ -1,8 +1,9 @@
+import os
 import argparse
 import requests
 import pandas as pd
 
-def retraining_func(data_path, webhook):
+def retraining_func(data_path):
     """Model training function
 
     :param data_path: csv path of training data with 'y' as the target
@@ -19,11 +20,11 @@ def retraining_func(data_path, webhook):
         time.sleep(10)
         print("still training")
 
-
-    # TODO: save weights/model file under the SAME NAME (OVERWRITE)
+    # TODO: save weights/model file in path provided in env variable
+    retraining_output_path = os.getenv("RETRAINING_ARTIFACTS_PATH")
 
     # write dummy weights file
-    f = open("weights.txt", "w")
+    f = open(retraining_output_path, "w")
     f.write("I am heavier")
     f.close()
 
@@ -37,12 +38,12 @@ if __name__ == '__main__':
 
 
     parser.add_argument('-d', '--data_path', help='path to re-training data')
-    parser.add_argument('-w', '--webhook', help='webhook to notify backend on')
+    parser.add_argument('-w', '--webhook', help='webhook to notify backend on when retraining is done')
 
     args = parser.parse_args()
 
     # TODO: call retraining function
-    y = retraining_func(args.data_path, args.webhook)
+    y = retraining_func(args.data_path)
 
     # TODO: notify backend that retraining is done
     requests.get(args.webhook)

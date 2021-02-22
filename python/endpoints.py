@@ -5,7 +5,7 @@ more on types: https://fastapi.tiangolo.com/python-types/
 fastapi vs flask: https://testdriven.io/blog/moving-from-flask-to-fastapi/#:~:text=Its%20popularity%20is%20fueled%20by,amongst%20the%20machine%20learning%20community.&text=Unlike%20Flask%2C%20FastAPI%20is%20an,fastest%20Python%2Dbased%20web%20frameworks.
 pydantic validation: https://pydantic-docs.helpmanual.io/usage/
 """
-
+import os
 import uvicorn
 
 from fastapi import FastAPI, Response
@@ -16,8 +16,11 @@ from typing import Optional, List, Set, Tuple, Dict
 
 app = FastAPI(openapi_url='/docs')
 
-# TODO: load your model *here*
+# TODO: load your model artifacts *here*
+artifacts_path = os.getenv('ARTIFACTS_PATH')
+
 # model = pickle.load(file_path)
+print("model loaded")
 
 # TODO: create your request serializer, insert all fields and types
 # example request seralizer
