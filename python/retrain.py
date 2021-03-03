@@ -16,7 +16,7 @@ def retraining_func(data_path):
     # dummy retraining
     import time
 
-    for i in range(360):
+    for i in range(5):
         time.sleep(10)
         print("still training")
 

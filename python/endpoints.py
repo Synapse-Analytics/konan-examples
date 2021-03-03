@@ -19,8 +19,8 @@ app = FastAPI(openapi_url='/docs')
 # TODO: load your model artifacts *here*
 artifacts_path = os.getenv('ARTIFACTS_PATH')
 
-# model = pickle.load(file_path)
-print("model loaded")
+# model = pickle.load(f'{artifacts_path}/weights.pkl')
+print("model loaded from artifacts path")
 
 # TODO: create your request serializer, insert all fields and types
 # example request seralizer
