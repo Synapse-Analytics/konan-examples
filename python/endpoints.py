@@ -17,8 +17,9 @@ from typing import Optional, List, Set, Tuple, Dict
 app = FastAPI(openapi_url='/docs')
 
 # TODO: load your model artifacts *here*
-artifacts_path = os.getenv('ARTIFACTS_PATH')
+artifacts_path = '/artifacts'
 
+# ex: 
 # model = pickle.load(f'{artifacts_path}/weights.pkl')
 print("model loaded from artifacts path")
 

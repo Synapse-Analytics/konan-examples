@@ -24,7 +24,7 @@ def retraining_func(data_path):
     retraining_output_path = os.getenv("RETRAINING_ARTIFACTS_PATH")
 
     # write dummy weights file
-    f = open(retraining_output_path, "w")
+    f = open(f'{retraining_output_path}/weights.txt', "w")
     f.write("I am heavier")
     f.close()
 
