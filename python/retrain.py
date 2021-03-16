@@ -38,15 +38,10 @@ if __name__ == '__main__':
 
 
     parser.add_argument('-d', '--data_path', help='path to re-training data')
-    parser.add_argument('-w', '--webhook', help='webhook to notify backend on when retraining is done')
 
     args = parser.parse_args()
 
     # TODO: call retraining function
     y = retraining_func(args.data_path)
-
-    # TODO: notify backend that retraining is done
-    requests.get(args.webhook)
-    print("Acknowledgement sent")
 
 
