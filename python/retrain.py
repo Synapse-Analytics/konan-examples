@@ -3,11 +3,11 @@ import argparse
 import requests
 import pandas as pd
 
-def retraining_func(data_path):
+def retraining_func(data_path, output_base_path):
     """Model training function
 
     :param data_path: csv path of training data with 'y' as the target
-    :param webhook: webhook string used to notify backend that training is done
+    :param output_path: retraining output base path to write retraining artifacts
     """
 
     # TODO: read data
@@ -20,11 +20,10 @@ def retraining_func(data_path):
         time.sleep(10)
         print("still training")
 
-    # TODO: save weights/model file in path provided in env variable
-    retraining_output_path = os.getenv("RETRAINING_ARTIFACTS_PATH")
+    # TODO: save weights/model file in path provided 
 
     # write dummy weights file
-    f = open(f'{retraining_output_path}/weights.txt', "w")
+    f = open(f'{output_base_path}/weights.txt', "w")
     f.write("I am heavier")
     f.close()
 
@@ -37,6 +36,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='konan retraining')
 
     parser.add_argument('-d', '--data_path', help='path to re-training data')
+    parser.add_argument('-o', '--output_path', help='base path to write retraining artifacts')
 
     args = parser.parse_args()
 
