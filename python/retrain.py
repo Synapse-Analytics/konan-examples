@@ -1,13 +1,15 @@
 import os
+import json
 import argparse
 import requests
 import pandas as pd
 
-def retraining_func(data_path, output_base_path):
+def retraining_func(data_path, output_base_path, metrics_path):
     """Model training function
 
     :param data_path: csv path of training data with 'y' as the target
     :param output_path: retraining output base path to write retraining artifacts
+    :param metrics_path: file path to write retraining metrics
     """
 
     # TODO: read data
@@ -27,6 +29,17 @@ def retraining_func(data_path, output_base_path):
     f.write("I am heavier")
     f.close()
 
+    # retraining performance
+    metrics = {
+                'MSE': 0.0,
+                'Accuracy': 1.0,
+                'Precision': 1.0
+              }
+    
+    # write retraining metrics to provided json file
+    with open(metrics_path, 'w') as f:
+        json.dump(metrics, f)
+
     print("retraining successfully completed")
 
     return
@@ -37,8 +50,10 @@ if __name__ == '__main__':
 
     parser.add_argument('-d', '--data_path', help='path to re-training data')
     parser.add_argument('-o', '--output_path', help='base path to write retraining artifacts')
+    parser.add_argument('-m', '--metrics_path', help='file path to write retraining metrics')
+
 
     args = parser.parse_args()
 
     # TODO: call retraining function
-    y = retraining_func(args.data_path)
+    y = retraining_func(args.data_path, args.output_path, args.metrics_path)
