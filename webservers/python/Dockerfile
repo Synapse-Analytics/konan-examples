@@ -1,24 +1,26 @@
+# Specify base image
 FROM python:3.7-slim-stretch
 
-# install dependencies
+# Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential make gcc gnupg \
     python3-dev unixodbc-dev
 
+# Create /app dir and it set as working directory
 RUN mkdir /app
 WORKDIR /app
 
+# Copy file
 COPY requirements.txt /app
 
-# install requirements
+# Install requirements
 RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
 RUN pip install --no-cache-dir -r requirements.txt
 
-# copy relevant files and directories
+# Copy relevant files and directories
 COPY . /app
 
+# Expose port and run web server
 EXPOSE 8000
-
-CMD ["uvicorn", "endpoints:app", "--host", "0.0.0.0", "--port", "8000"]
-
+CMD ["uvicorn", "endpoints:app", "--workers", "1", "--host", "0.0.0.0", "--port", "8000"]
