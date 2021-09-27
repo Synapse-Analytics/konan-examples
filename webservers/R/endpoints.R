@@ -47,10 +47,10 @@ check_parameter_ranges <- function(input_df){
 }
 
 #* Return a prediction using two reuired and two optional parameters
-#* @param feat_1_int:int Required, numeric argument, must be in [1,5]
-#* @param feat_2_int:int Optional, numeric argument, must be in [10,15]
-#* @param feat_1_char Required categorical variable, must be one of ['Blue', 'Red', 'Green']
-#* @param feat_2_char Optional categorical variable, must be one of ['Blue', 'Red', 'Green']
+#* @param feat_1_int:df Required, numeric argument, must be in [1,5]
+#* @param feat_2_int:df Optional, numeric argument, must be in [10,15]
+#* @param feat_1_char:df Required categorical variable, must be one of ['Blue', 'Red', 'Green']
+#* @param feat_2_char:df Optional categorical variable, must be one of ['Blue', 'Red', 'Green']
 #* @post /predict
 function(req, feat_1_int, feat_2_int = NULL, feat_1_char, feat_2_char = NULL) {
 
