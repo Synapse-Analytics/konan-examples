@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Response
-from pydantic import BaseModel, validator, ValidationError
+from pydantic import BaseModel, validator
 
 # import the types you need
 from typing import Optional
@@ -23,7 +23,7 @@ class PredictionRequest(BaseModel):
         Validates prediction score is in ranges or limits.
         """
         if v not in ["A", "B", "C"]:
-            raise ValidationError('Unknown value, must be a value in ["A", "B", "C"]')
+            raise ValueError('Unknown value, must be a value in ["A", "B", "C"]')
         return v
 
 

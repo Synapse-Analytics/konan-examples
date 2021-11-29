@@ -23,4 +23,4 @@ COPY . /app
 
 # Expose port and run web server
 EXPOSE 8000
-CMD ["uvicorn", "endpoints:app", "--workers", "1", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "server:app", "--workers", "1", "--host", "0.0.0.0", "--port", "8000"]
